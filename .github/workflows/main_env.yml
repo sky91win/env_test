@@ -1,0 +1,22 @@
+name: env test
+on: Push
+jobs:
+  top secret:
+    steps:
+      - name: Read an env variable
+      - run: echo "My APP_ID value is ${{env.APP_ID}}"
+      - uses: actions/checkout@v3
+      - name: Read the env from an external script
+        run: |
+          chmod +x .github/script/custom.sh
+          .github/script/custom.sh
+        shell: bash
+    top-secret-production:
+      runs on: ubuntu-latest
+      environment: production
+      env:
+        APP_ID: ${{ var.APP_ID}}      
+      Steps:
+        - name: read a variable
+        run: echo  "My APP_ID value in the production job is $APP_ID
+
